@@ -1,7 +1,7 @@
 {
     "manifestVersion": 1.0,
     "id": "vsts-extensions-multivalue-control-dod",
-    "version": "3.0.1",
+    "version": "3.0.2",
     "name": "Multivalue control - DoD",
     "description": "A work item form control for Definition of Done checklists. Shows all items and requires all to be checked before moving to Done.",
     "publisher": "mk-lf",
@@ -111,6 +111,24 @@
                         "name": "Set the maximum display length for each option's label. Defaults to 35 if not set.",
                         "validation": {
                             "dataType": "Number",
+                            "isRequired": false
+                        }
+                    },
+                    {
+                        "id": "HelpUrl",
+                        "name": "Link to wiki or documentation for this Definition of Done",
+                        "description": "Optional URL shown as a help link above the checklist (e.g. an Azure DevOps wiki page)",
+                        "validation": {
+                            "dataType": "String",
+                            "isRequired": false
+                        }
+                    },
+                    {
+                        "id": "HelpUrlLabel",
+                        "name": "Label for the help link",
+                        "description": "Display text for the help link. Defaults to 'Definition of Done guidelines' if not set.",
+                        "validation": {
+                            "dataType": "String",
                             "isRequired": false
                         }
                     }

@@ -39,11 +39,15 @@ export class MultiValueEvents {
             error = dodError;
         }
 
+        const helpUrl: string = VSS.getConfiguration().witInputs.HelpUrl || "";
+        const helpUrlLabel: string = VSS.getConfiguration().witInputs.HelpUrlLabel || "";
         ReactDOM.render(<MultiValueControl
             selected={selected}
             options={await getSuggestedValues()}
             onSelectionChanged={this._setSelected}
             error={error}
+            helpUrl={helpUrl}
+            helpUrlLabel={helpUrlLabel}
         />, this._container, () => {
             this._resize();
             if (this._onRefreshed) {

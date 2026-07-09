@@ -13,6 +13,7 @@
     "build:dev": "npm run clean && mkdir dist && npm run build:styles && webpack --progress --color --output-path ./dist",
     "build:release": "npm run clean && mkdir dist && npm run build:styles && webpack --progress --color --output-path ./dist --mode production",
     "publish:release": "npm run build:release && node ./scripts/publishRelease",
+    "create:vsix": "npx tfx extension create --overrides-file configs/release.json --manifest-globs azure-devops-extension.json --no-prompt --json",
     "test": "karma start --single-run"
   },
   "devDependencies": {

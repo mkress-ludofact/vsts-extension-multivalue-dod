@@ -11,6 +11,8 @@ interface IMultiValueControlProps {
   onSelectionChanged?: (selection: string[]) => Promise<void>;
   options: string[];
   error: JSX.Element;
+  helpUrl?: string;
+  helpUrlLabel?: string;
 }
 
 export class MultiValueControl extends React.Component<IMultiValueControlProps> {
@@ -25,10 +27,18 @@ export class MultiValueControl extends React.Component<IMultiValueControlProps> 
   };
 
   public render() {
-    const { selected = [], options, error, readOnly } = this.props;
+    const { selected = [], options, error, readOnly, helpUrl, helpUrlLabel } = this.props;
+    const linkLabel = helpUrlLabel || "Definition of Done guidelines";
 
     return (
       <div className="multi-value-control dod-checklist" style={{ width: "100%", padding: "4px 0" }}>
+        {helpUrl && (
+          <div className="dod-help-link-container">
+            <a href={helpUrl} target="_blank" rel="noopener noreferrer" className="dod-help-link">
+              📖 {linkLabel}
+            </a>
+          </div>
+        )}
         <FocusZone direction={FocusZoneDirection.vertical}>
           {options.map((o) => (
             <Checkbox

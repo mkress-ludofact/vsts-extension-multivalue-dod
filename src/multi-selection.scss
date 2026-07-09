@@ -141,6 +141,17 @@
       padding: 4px 2px;
       font-weight: 600;
     }
+    .dod-help-link-container {
+      padding: 2px 0 6px 0;
+    }
+    .dod-help-link {
+      font-size: 12px;
+      text-decoration: none;
+      @include color(--palette-primary-tint-10, 0, 90, 158);
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
 }
 
