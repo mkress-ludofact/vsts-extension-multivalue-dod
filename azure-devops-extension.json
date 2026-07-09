@@ -1,7 +1,7 @@
 {
     "manifestVersion": 1.0,
     "id": "vsts-extensions-multivalue-control-dod",
-    "version": "2.2.29",
+    "version": "1.0.1",
     "name": "Multivalue control - DoD",
     "description": "A work item form control for Definition of Done checklists. Shows all items and requires all to be checked before moving to Done.",
     "publisher": "mk-lf",
