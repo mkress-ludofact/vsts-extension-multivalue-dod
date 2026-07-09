@@ -34,6 +34,10 @@ const provider = () => {
             ) {
                 control.refresh();
             }
+            // Re-validate DoD when the State field changes
+            if (control && args.changedFields["System.State"] !== undefined) {
+                control.refresh();
+            }
         },
     };
 };

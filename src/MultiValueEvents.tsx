@@ -9,6 +9,7 @@ import { MultiValueControl } from "./MultiValueControl";
 
 initializeIcons();
 const HELP_URL = "https://github.com/Microsoft/vsts-extension-multivalue-control#azure-devops-services";
+const DONE_STATES = ["Done", "Closed", "Resolved"];
 
 export class MultiValueEvents {
     public readonly fieldName = VSS.getConfiguration().witInputs.FieldName;
@@ -33,13 +34,15 @@ export class MultiValueEvents {
             selected = await this._getSelected();
         }
 
+        const dodError = await this._validateDoD(selected);
+        if (dodError) {
+            error = dodError;
+        }
+
         ReactDOM.render(<MultiValueControl
             selected={selected}
             options={await getSuggestedValues()}
             onSelectionChanged={this._setSelected}
-            width={this._container.scrollWidth}
-            placeholder={selected.length ? "Click to Add" : "No selection made"}
-            onResize={this._resize}
             error={error}
         />, this._container, () => {
             this._resize();
@@ -48,6 +51,25 @@ export class MultiValueEvents {
             }
         });
     }
+    private async _validateDoD(selected: string[]): Promise<JSX.Element | null> {
+        try {
+            const formService = await WorkItemFormService.getService();
+            const state = await formService.getFieldValue("System.State") as string;
+            if (DONE_STATES.indexOf(state) >= 0) {
+                const options = await getSuggestedValues();
+                const unchecked = options.filter((o) => selected.indexOf(o) < 0);
+                if (unchecked.length > 0) {
+                    return <div className="dod-validation-error">
+                        {`All Definition of Done items must be completed before moving to "${state}". Missing: ${unchecked.join(", ")}`}
+                    </div>;
+                }
+            }
+        } catch (e) {
+            // ignore validation errors to not break the control
+        }
+        return null;
+    }
+
     private _resize = () => {
         VSS.resize(this._container.scrollWidth || 200, this._container.scrollHeight || 40);
     }

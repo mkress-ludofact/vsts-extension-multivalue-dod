@@ -121,6 +121,27 @@
   .error {
     @include color(--palette-accent1, 218, 10, 0);
   }
+  .dod-checklist {
+    .dod-item {
+      padding: 3px 0;
+      button {
+        width: 100%;
+        color: var(--text-primary-color, inherit) !important;
+        label {
+          color: var(--text-primary-color, inherit) !important;
+        }
+        span {
+          color: var(--text-primary-color, inherit) !important;
+        }
+      }
+    }
+    .dod-validation-error {
+      @include color(--palette-accent1, 218, 10, 0);
+      font-size: 12px;
+      padding: 4px 2px;
+      font-weight: 600;
+    }
+  }
 }
 
 .closeIconcustom {
